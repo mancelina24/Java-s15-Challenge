@@ -14,9 +14,11 @@ public class Author extends Person{
     public List<Book> getBooks() {
         return books;
     }
+
     public void addBook(Book book){
         this.books.add(book);
     }
+
     public Book newBook(int bookId, String name, double price, String edition, String category) {
         Book book = new Book(bookId, name, this, price, "Available", edition, LocalDate.now(), null, category);
         addBook(book);

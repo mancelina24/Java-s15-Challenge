@@ -13,7 +13,7 @@ public class Faculty extends MemberRecord{
         this.position = position;
     }
 
-    public String facultyId() {
+    public String getFacultyId() {
         return facultyId;
     }
 

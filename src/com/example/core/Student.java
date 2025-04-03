@@ -1,5 +1,7 @@
 package com.example.core;
 
+import java.util.List;
+
 public class Student extends MemberRecord{
     private String studentId;
     private String department;

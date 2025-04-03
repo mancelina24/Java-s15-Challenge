@@ -4,19 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Reader extends Person{
-    private List<Book> books;
+    private List<Book> borrowedBooks;
     private final int memberId;
-    private MemberRecord memberRecord;
+    private MemberRecord memberRecord; // Okuyucuya ait üyelik kaydı (Composition)
 
     public Reader(String name, int memberId, MemberRecord memberRecord) {
         super(name);
-        this.books = new ArrayList<>();
+        this.borrowedBooks = new ArrayList<>();
         this.memberId = memberId;
         this.memberRecord = memberRecord;
     }
 
-    public List<Book> getBooks() {
-        return books;
+    public List<Book> getBorrowedBooks() {
+        return borrowedBooks;
     }
 
     public int getMemberId() {
@@ -29,7 +29,7 @@ public class Reader extends Person{
 
     public boolean borrowBook(Book book){
         if(memberRecord.getNoBooksIssued()<memberRecord.getMaxBookLimit() && book.getStatus().equals("Available")){
-            this.books.add(book);
+            this.borrowedBooks.add(book);
             book.updateStatus("Borrowed");
             book.setCurrentOwner(this);
             memberRecord.incBookUssued();
@@ -39,8 +39,8 @@ public class Reader extends Person{
     }
 
     public boolean returnBook(Book book){
-        if(this.books.contains(book)){
-            this.books.remove(book);
+        if(this.borrowedBooks.contains(book)){
+            this.borrowedBooks.remove(book);
             book.updateStatus("Available");
             book.setCurrentOwner(null);
             memberRecord.decBookIssued();
@@ -48,9 +48,9 @@ public class Reader extends Person{
         }
         return false;
     }
-    public void showBooks(){
+    public void showBorrowedBooks(){
         System.out.println("Okuyucu " + getName() + "'nın Aldığı Kitaplar:");
-        for (Book book: books){
+        for (Book book: borrowedBooks){
             System.out.println(book);
         }
     }
